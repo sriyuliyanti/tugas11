@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+   db:
+     image: mysql-chat 
+     ports:
+       - "3306:3306"
+     environment:
+       MYSQL_ROOT_PASSWORD: tcc
+       MYSQL_DATABASE: chatting
+
+   web:
+     links:
+       - db
+     image: michaeldim/alpine-nginx-php 
+     ports:
+       - "80:80"
+     volumes:
+       - ./app:/var/www/
